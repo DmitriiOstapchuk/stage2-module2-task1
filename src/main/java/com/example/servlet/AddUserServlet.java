@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet("/add")
 public class AddUserServlet extends HttpServlet {
-    Warehouse warehouse = Warehouse.getInstance();
+    private static final Warehouse warehouse = Warehouse.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,8 +23,8 @@ public class AddUserServlet extends HttpServlet {
             User user = new User(firstName, lastName);
             warehouse.addUser(user);
             req.setAttribute("user", user);
-            req.getRequestDispatcher("/add.jsp").forward(req, resp);
-        } catch (ServletException e) {
+//            req.getRequestDispatcher("/add").forward(req, resp);
+        } catch (Exception e) {
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to add user");
         }
