@@ -23,10 +23,20 @@ public class AddUserServlet extends HttpServlet {
             User user = new User(firstName, lastName);
             warehouse.addUser(user);
             req.setAttribute("user", user);
-//            req.getRequestDispatcher("/add").forward(req, resp);
+            req.getRequestDispatcher("/add").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to add user");
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            req.getRequestDispatcher("/users.jsp").forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to show page for adding user");
         }
     }
 }

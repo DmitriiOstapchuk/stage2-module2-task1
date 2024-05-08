@@ -17,7 +17,7 @@ public class GetUsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.setAttribute("users", warehouse.getUsers());
-//            req.getRequestDispatcher("/users").forward(req, resp);
+            req.getRequestDispatcher("/users").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to retrieve users");
