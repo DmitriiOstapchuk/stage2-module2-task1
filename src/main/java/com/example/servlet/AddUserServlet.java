@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/add")
@@ -22,8 +23,8 @@ public class AddUserServlet extends HttpServlet {
             User user = new User(firstName, lastName);
             warehouse.addUser(user);
             req.setAttribute("user", user);
-            resp.sendRedirect("/add.jsp");
-        } catch (Exception e) {
+            req.getRequestDispatcher("/add.jsp").forward(req, resp);
+        } catch (ServletException e) {
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to add user");
         }
